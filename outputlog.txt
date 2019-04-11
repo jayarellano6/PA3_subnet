@@ -1,3 +1,21 @@
+commit de76896bd2e2bbe9b74316bf3404c595cbb82918
+Author: sampsonliao <sliao@csumb.edu>
+Date:   Thu Apr 11 20:22:43 2019 +0000
+
+    added original legacy_router.py
+
+commit b86fc1bf08d5abbcab85dd968ce88601972e45bc
+Author: sampsonliao <sliao@csumb.edu>
+Date:   Thu Apr 11 16:05:48 2019 +0000
+
+    removed r1.cmd
+
+commit 4794be6317a368e1ce5522d8a06c52504021362b
+Author: sampsonliao <sliao@csumb.edu>
+Date:   Thu Apr 11 15:59:48 2019 +0000
+
+    added output log
+
 commit 9899e76e89f18b05f3fb96e4f45d0df040d6e366
 Author: sampsonliao <sliao@csumb.edu>
 Date:   Thu Apr 11 15:54:38 2019 +0000
@@ -21,3 +39,21 @@ Author: sampsonliao <sliao@csumb.edu>
 Date:   Mon Apr 8 12:47:06 2019 -0700
 
     create README.md
+21,22c21,22
+<     r1 = net.addHost('r1', cls=Node, ip='0.0.0.0')
+<     r1.cmd('sysctl -w net.ipv4.ip_forward=1')
+---
+>     r1 = net.addHost('r1', cls=Node, ip='10.0.0.1/8')
+>     # r1.cmd('sysctl -w net.ipv4.ip_forward=1')
+25,26c25,26
+<     h1 = net.addHost('h1', cls=Host, ip='10.0.0.2', defaultRoute=None)
+<     h2 = net.addHost('h2', cls=Host, ip='10.0.0.1', defaultRoute=None)
+---
+>     h1 = net.addHost('h1', cls=Host, ip='10.0.0.2', defaultRoute='via 10.0.0.1')
+>     h2 = net.addHost('h2', cls=Host, ip='192.168.1.100', defaultRoute='via 192.168.1.1')
+29,30c29,30
+<     net.addLink(h1, r1)
+<     net.addLink(h2, r1)
+---
+>     net.addLink(h1, r1, params2={ 'ip' : '10.0.0.1/8'})
+>     net.addLink(h2, r1, params2={ 'ip' : '192.168.1.1/8'})
