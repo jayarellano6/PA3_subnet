@@ -19,7 +19,7 @@ def myNetwork():
     info( '*** Adding controller\n' )
     info( '*** Add switches\n')
     r1 = net.addHost('r1', cls=Node, ip='192.168.1.1/24')
-    r1.cmd('sysctl -w net.ipv4.ip_forward=1')
+    # r1.cmd('sysctl -w net.ipv4.ip_forward=1')
 
     info( '*** Add hosts\n')
     h1 = net.addHost('h1', cls=Host, ip='192.168.1.100/24', defaultRoute='via 192.168.1.1')
