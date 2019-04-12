@@ -1,3 +1,15 @@
+commit 54b9ac62fe8be5f3ab7b80cfc642fa64554f087e
+Author: sampsonliao <sliao@csumb.edu>
+Date:   Fri Apr 12 17:11:23 2019 +0000
+
+    simplified changes
+
+commit 957c8b45e39adae691da8efe0ff3c022ca8fb142
+Author: sampsonliao <sliao@csumb.edu>
+Date:   Thu Apr 11 20:24:19 2019 +0000
+
+    updated outputlog with diff
+
 commit de76896bd2e2bbe9b74316bf3404c595cbb82918
 Author: sampsonliao <sliao@csumb.edu>
 Date:   Thu Apr 11 20:22:43 2019 +0000
@@ -39,21 +51,25 @@ Author: sampsonliao <sliao@csumb.edu>
 Date:   Mon Apr 8 12:47:06 2019 -0700
 
     create README.md
+17c17
+<                    ipBase='10.0.0.0/8')
+---
+>                    ipBase='10.26.1.0/24')
 21,22c21,22
 <     r1 = net.addHost('r1', cls=Node, ip='0.0.0.0')
 <     r1.cmd('sysctl -w net.ipv4.ip_forward=1')
 ---
->     r1 = net.addHost('r1', cls=Node, ip='10.0.0.1/8')
+>     r1 = net.addHost('r1', cls=Node, ip='10.26.1.1/24')
 >     # r1.cmd('sysctl -w net.ipv4.ip_forward=1')
 25,26c25,26
 <     h1 = net.addHost('h1', cls=Host, ip='10.0.0.2', defaultRoute=None)
 <     h2 = net.addHost('h2', cls=Host, ip='10.0.0.1', defaultRoute=None)
 ---
->     h1 = net.addHost('h1', cls=Host, ip='10.0.0.2', defaultRoute='via 10.0.0.1')
->     h2 = net.addHost('h2', cls=Host, ip='192.168.1.100', defaultRoute='via 192.168.1.1')
+>     h1 = net.addHost('h1', cls=Host, ip='10.26.1.2/24', defaultRoute='via 10.26.1.1')
+>     h2 = net.addHost('h2', cls=Host, ip='10.26.2.2/24', defaultRoute='via 10.26.2.1')
 29,30c29,30
 <     net.addLink(h1, r1)
 <     net.addLink(h2, r1)
 ---
->     net.addLink(h1, r1, params2={ 'ip' : '10.0.0.1/8'})
->     net.addLink(h2, r1, params2={ 'ip' : '192.168.1.1/8'})
+>     net.addLink(h1, r1, params2={ 'ip' : '10.26.1.1/24'})
+>     net.addLink(h2, r1, params2={ 'ip' : '10.26.2.1/24'})
